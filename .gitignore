@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.jsonl
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env
+.env.local
+**/backend/logs/
+**/backend/transcripts/
