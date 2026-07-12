@@ -62,6 +62,7 @@ flowchart TD
 - Sàng lọc red-flag bằng từ khóa **ngay tại client** trước khi gọi LLM, để tình huống khẩn
   cấp không phải chờ round-trip API (xem mục 15.2).
 - Code: [`An/`](An/) — backend Gemini thật (`An/backend`), frontend chat (`An/frontend`).
+- Deploy lên Render — xem [`DEPLOY.md`](DEPLOY.md).
 
 ### 2. Giám sát sinh hiệu real-time — 🔲 Chưa làm
 - Theo dõi nhịp tim và chỉ số cơ thể (SpO2, nhiệt độ...) **mỗi ngày** từ đồng hồ đeo tay.

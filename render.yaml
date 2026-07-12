@@ -1,0 +1,38 @@
+services:
+  # Backend — Python HTTP server bridging the frontend to the Gemini agent
+  - type: web
+    name: vho-an-backend
+    runtime: python
+    rootDir: An/backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: TRIAGE_PROVIDER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: TRIAGE_MODEL
+        value: gemini-2.5-flash
+    autoDeploy: true
+
+  # Frontend — React + Vite static site
+  - type: web
+    name: vho-an-frontend
+    runtime: static
+    rootDir: An/frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      # Sau khi vho-an-backend deploy xong, đổi thành
+      # https://<vho-an-backend-url>.onrender.com/triage rồi redeploy
+      # (Vite bake env var vào lúc build).
+      - key: VITE_TRIAGE_API_URL
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    autoDeploy: true
