@@ -11,15 +11,30 @@ Prototype frontend cho Day 06 — built với React + Vite + Framer Motion.
 ## Chạy thử
 
 ```bash
-cd triage-chat-ui/frontend
+cd An/frontend
 npm install
-npm run dev          # mở http://localhost:5173
+npm run dev          # chỉ frontend, mở http://localhost:5173
 ```
 
 Build production: `npm run build` → `npm run preview`.
 
 > Cần Node ≥ 18. Mặc định **không cần API key** — engine triage chạy bằng rule-based
 > mô phỏng AI, đủ để demo cả 4 đường đi (xem dưới).
+
+### Chạy cả backend + frontend bằng 1 lệnh
+
+`npm run dev` chỉ khởi động frontend (Vite) — backend Gemini là script Python riêng, npm
+không tự biết để chạy cùng. Dùng `dev:all` để khởi động cả 2 song song, log gộp có prefix
+`[backend]`/`[frontend]` phân biệt:
+
+```bash
+cd An/frontend
+npm install
+npm run dev:all      # chạy `python -X utf8 server.py` + `vite` cùng lúc
+```
+
+Cần cấu hình `An/backend/.env` trước (xem phần Gemini bên dưới), nếu không backend sẽ báo
+thiếu `GEMINI_API_KEY` nhưng frontend vẫn chạy bình thường bằng rule-based fallback.
 
 ---
 
@@ -80,24 +95,27 @@ stdlib cho tầng web) gọi Google Gemini qua `GeminiProvider`, trả về đú
 `{ events, profile }` mà frontend render.
 
 ```bash
-# 1) Backend
-cd triage-chat-ui/backend
+# 1) Backend — cài deps + điền key
+cd An/backend
 pip install -r requirements.txt          # cần google-genai
 cp .env.example .env                      # rồi điền GEMINI_API_KEY
 #   lấy key tại https://aistudio.google.com/apikey
-python3 server.py                         # http://localhost:8787  (GET /health để kiểm tra)
 
-# 2) Frontend — trong triage-chat-ui/frontend/.env
+# 2) Frontend — trỏ tới backend
 cd ../frontend
 echo 'VITE_TRIAGE_API_URL=http://localhost:8787/triage' > .env
-npm run dev
+npm install
+
+# 3) Chạy cả 2 cùng lúc (xem "Chạy cả backend + frontend bằng 1 lệnh" ở trên)
+npm run dev:all
 ```
 
 - Khi đã trỏ `VITE_TRIAGE_API_URL`, toàn bộ hội thoại đi qua **Gemini thật**; chỉnh sửa
   triệu chứng cũng gửi correction về backend đánh giá lại.
 - Backend tắt / thiếu key / trả JSON hỏng → frontend **tự fallback rule-based engine**,
   demo không bao giờ chết.
-- Đổi model qua `GEMINI_MODEL` trong `backend/.env` (mặc định `gemini-2.0-flash`).
+- Đổi model qua `TRIAGE_MODEL` trong `backend/.env` (mặc định dùng `gemini-2.5-flash`
+  nếu bạn theo `.env.example`, hoặc model mặc định của provider nếu để trống).
 - **Không commit `.env`** (đã gitignore) — chỉ commit `.env.example`.
 
 ---

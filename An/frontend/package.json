@@ -6,6 +6,8 @@
   "description": "An — Conversational Symptom Triage Assistant (Day 06 hackathon prototype)",
   "scripts": {
     "dev": "vite",
+    "dev:backend": "cd ../backend && python -X utf8 server.py",
+    "dev:all": "concurrently -n backend,frontend -c blue,green \"npm:dev:backend\" \"npm:dev\"",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -16,6 +18,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^10.0.3",
     "vite": "^5.4.11"
   }
 }
