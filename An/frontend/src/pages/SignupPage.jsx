@@ -9,16 +9,34 @@ const GENDERS = [
   { value: 'khac', label: 'Khác' },
 ]
 
+const today = new Date()
+const MAX_BIRTH_DATE = today.toISOString().slice(0, 10)
+const MIN_BIRTH_DATE = new Date(today.getFullYear() - 119, today.getMonth(), today.getDate())
+  .toISOString()
+  .slice(0, 10)
+
+function calculateAge(birthDateStr) {
+  if (!birthDateStr) return null
+  const dob = new Date(birthDateStr + 'T00:00:00')
+  if (Number.isNaN(dob.getTime())) return null
+  let age = today.getFullYear() - dob.getFullYear()
+  const monthDiff = today.getMonth() - dob.getMonth()
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) age--
+  return age
+}
+
 export default function SignupPage() {
   const { register } = useAuth()
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [age, setAge] = useState('')
+  const [birthDate, setBirthDate] = useState('')
   const [gender, setGender] = useState('')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState(null)
+
+  const age = calculateAge(birthDate)
 
   async function onSubmit(e) {
     e.preventDefault()
@@ -26,10 +44,14 @@ export default function SignupPage() {
       setError('Vui lòng chọn giới tính.')
       return
     }
+    if (age === null || age < 1 || age > 119) {
+      setError('Vui lòng chọn ngày sinh hợp lệ.')
+      return
+    }
     setBusy(true)
     setError(null)
     try {
-      await register({ email, password, age: Number(age), gender })
+      await register({ email, password, age, gender })
       navigate('/app', { replace: true })
     } catch (err) {
       setError(err.message || 'Đăng ký thất bại, thử lại nhé.')
@@ -84,16 +106,18 @@ export default function SignupPage() {
           </label>
 
           <label className="auth-field">
-            <span>Tuổi</span>
+            <span>Ngày sinh</span>
             <input
-              type="number"
+              type="date"
               required
-              min={1}
-              max={119}
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              placeholder="vd: 28"
+              min={MIN_BIRTH_DATE}
+              max={MAX_BIRTH_DATE}
+              value={birthDate}
+              onChange={(e) => setBirthDate(e.target.value)}
             />
+            {age !== null && age >= 0 && age <= 119 && (
+              <span className="auth-field__hint">{age} tuổi</span>
+            )}
           </label>
 
           <div className="auth-field">
