@@ -1,7 +1,7 @@
 /* ============================================================
    Yên — Trợ lý y tế cá nhân
-   Aesthetic: "Serene Blush" — giấy hồng phấn dịu, mực nâu mận sâu,
-   thương hiệu hồng y tế, hổ phách + đất nung cho tín hiệu triage.
+   Aesthetic: "Blood Blush" — giấy hồng phấn ánh đỏ máu, mực nâu mận sâu,
+   thương hiệu hồng pha đỏ máu, hổ phách + đất nung cho tín hiệu triage.
    Fraunces (display serif) · Be Vietnam Pro (UI) · Spline Mono (labels)
 
    Ghi chú: tên biến --sage/--mint-rail giữ nguyên từ bản gốc để tránh
@@ -9,27 +9,27 @@
    ============================================================ */
 
 :root {
-  /* — Paper & ink — hồng phấn dịu — */
-  --paper: #f3dee2;
-  --paper-2: #edd0d7;
-  --paper-warm: #faeaec;
-  --card: #fdf5f6;
-  --card-edge: #f0d7dc;
-  --ink: #33202a;       /* nâu mận sâu */
-  --ink-2: #5c3642;
-  --ink-soft: #7d5560;
-  --ink-faint: #a98891;
+  /* — Paper & ink — hồng phấn ánh đỏ máu — */
+  --paper: #f2d9dd;
+  --paper-2: #ecc9d0;
+  --paper-warm: #f9e5e7;
+  --card: #fcf2f3;
+  --card-edge: #efced4;
+  --ink: #331a22;       /* nâu mận sâu, ngả đỏ */
+  --ink-2: #5c2c37;
+  --ink-soft: #7d4a54;
+  --ink-faint: #a97b85;
 
-  /* — Brand: hồng y tế — */
-  --sage: #c9577f;
-  --sage-deep: #9c3c5c;
-  --sage-bright: #db7d9d;
-  --sage-tint: #f3d7e0;
-  --sage-tint-2: #f8e5ea;
+  /* — Brand: hồng pha đỏ máu — */
+  --sage: #bf3f61;
+  --sage-deep: #8f2440;
+  --sage-bright: #d66684;
+  --sage-tint: #f2d4db;
+  --sage-tint-2: #f8e2e7;
 
   /* — Session-history rail — */
-  --mint-rail: #f0d2da;
-  --mint-rail-2: #e8c0cb;
+  --mint-rail: #eecad2;
+  --mint-rail-2: #e5b8c3;
 
   /* — Triage signals — */
   --green: #45975c;       /* self-care */
@@ -106,10 +106,10 @@ input, textarea { font-family: inherit; }
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(42% 40% at 16% 14%, rgba(219, 125, 157, 0.28), transparent 70%),
-    radial-gradient(34% 40% at 88% 8%, rgba(201, 87, 127, 0.20), transparent 72%),
-    radial-gradient(48% 52% at 92% 90%, rgba(156, 60, 92, 0.22), transparent 70%),
-    radial-gradient(40% 44% at 8% 92%, rgba(230, 150, 175, 0.18), transparent 72%);
+    radial-gradient(42% 40% at 16% 14%, rgba(214, 102, 132, 0.28), transparent 70%),
+    radial-gradient(34% 40% at 88% 8%, rgba(191, 63, 97, 0.20), transparent 72%),
+    radial-gradient(48% 52% at 92% 90%, rgba(143, 36, 64, 0.22), transparent 70%),
+    radial-gradient(40% 44% at 8% 92%, rgba(224, 130, 155, 0.18), transparent 72%);
   filter: saturate(108%);
   animation: drift 26s ease-in-out infinite alternate;
 }
@@ -127,7 +127,7 @@ input, textarea { font-family: inherit; }
 .atmos__veil {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(243,222,226,0.0) 40%, rgba(237,208,215,0.55) 100%);
+  background: linear-gradient(180deg, rgba(242,217,221,0.0) 40%, rgba(236,201,208,0.55) 100%);
 }
 
 /* ============================================================
@@ -169,7 +169,7 @@ input, textarea { font-family: inherit; }
   content: '';
   position: absolute; inset: -6px;
   border-radius: 18px;
-  background: radial-gradient(circle, rgba(201,87,127,0.45), transparent 70%);
+  background: radial-gradient(circle, rgba(191,63,97,0.45), transparent 70%);
   z-index: -1;
   animation: breathe 4.5s var(--ease) infinite;
 }
@@ -250,7 +250,7 @@ input, textarea { font-family: inherit; }
   display: flex;
   flex-direction: column;
   background: linear-gradient(170deg, var(--mint-rail), var(--mint-rail-2));
-  border: 1px solid #dba9b7;
+  border: 1px solid #d9909e;
   border-radius: var(--r-lg);
   box-shadow: var(--sh-1), var(--sh-inset);
   padding: 18px 16px;
@@ -258,7 +258,7 @@ input, textarea { font-family: inherit; }
 .history__label {
   font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase;
-  color: #7a2f47; margin: 2px 4px 14px;
+  color: #7a1f38; margin: 2px 4px 14px;
 }
 .history__new {
   display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -280,7 +280,7 @@ input, textarea { font-family: inherit; }
   width: 100%; text-align: left;
   background: none; border: none;
   padding: 11px 12px; border-radius: 12px;
-  color: #6b2b40;
+  color: #6b1c34;
   transition: background 0.18s, transform 0.16s var(--ease);
 }
 .history__item:hover { background: rgba(255,255,255,0.45); }
@@ -297,14 +297,14 @@ input, textarea { font-family: inherit; }
   font-size: 13.5px; font-weight: 500; color: var(--ink);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.history__when { font-size: 11px; color: #8a5566; font-family: var(--font-mono); }
-.history__ic { color: #9c6070; flex: none; }
+.history__when { font-size: 11px; color: #8a3d4c; font-family: var(--font-mono); }
+.history__ic { color: #9c4655; flex: none; }
 .history__foot {
-  font-size: 10.5px; color: #8a5566; line-height: 1.4;
+  font-size: 10.5px; color: #8a3d4c; line-height: 1.4;
   margin: 14px 4px 2px; opacity: 0.85;
 }
 .history__empty {
-  font-size: 12px; color: #7d5060; line-height: 1.5;
+  font-size: 12px; color: #7d3947; line-height: 1.5;
   padding: 6px 8px; font-style: italic; opacity: 0.9;
 }
 
@@ -381,7 +381,7 @@ input, textarea { font-family: inherit; }
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 13px; font-weight: 500; color: var(--sage-deep);
   background: var(--sage-tint-2);
-  border: 1px solid #f0d2da;
+  border: 1px solid #eec6ce;
   padding: 6px 12px; border-radius: 100px;
 }
 .chip__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage-bright); }
@@ -409,7 +409,7 @@ input, textarea { font-family: inherit; }
 .panel__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .edit-toggle {
   font-size: 12px; font-weight: 600; color: var(--sage-deep);
-  background: var(--sage-tint-2); border: 1px solid #edcdd6;
+  background: var(--sage-tint-2); border: 1px solid #edc0c9;
   padding: 4px 12px; border-radius: 100px;
   transition: background 0.18s, transform 0.16s var(--ease);
 }
@@ -519,7 +519,7 @@ input, textarea { font-family: inherit; }
   border-radius: var(--r-md);
   transition: transform 0.18s var(--ease), box-shadow 0.2s, border-color 0.2s;
 }
-.example-card:hover { transform: translateY(-2px); box-shadow: var(--sh-1); border-color: #e6c3cd; }
+.example-card:hover { transform: translateY(-2px); box-shadow: var(--sh-1); border-color: #e6b0ba; }
 .example-card__ic {
   width: 34px; height: 34px; flex: none; border-radius: 10px;
   display: grid; place-items: center; font-size: 17px;
@@ -578,7 +578,7 @@ input, textarea { font-family: inherit; }
   padding: 2px 8px; border-radius: 100px;
   border: 1px solid transparent;
 }
-.run-tag.gemini { background: var(--sage-tint-2); color: var(--sage-deep); border-color: #f0d0da; }
+.run-tag.gemini { background: var(--sage-tint-2); color: var(--sage-deep); border-color: #f0c2cc; }
 .run-tag.rule { background: var(--paper-2); color: var(--ink-faint); }
 .pulse-dot.is-idle { background: var(--ink-faint); animation: none; box-shadow: none; }
 .bubble strong { font-weight: 600; }
@@ -611,7 +611,7 @@ input, textarea { font-family: inherit; }
 .quick-chip {
   font-size: 13.5px; font-weight: 500; color: var(--sage-deep);
   background: var(--card);
-  border: 1.5px solid #edced8;
+  border: 1.5px solid #edbec8;
   padding: 9px 16px; border-radius: 100px;
   transition: transform 0.16s var(--ease), background 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
@@ -801,7 +801,7 @@ input, textarea { font-family: inherit; }
 }
 .composer__inner:focus-within {
   border-color: var(--sage-bright);
-  box-shadow: 0 0 0 4px rgba(201, 87, 127, 0.16);
+  box-shadow: 0 0 0 4px rgba(191, 63, 97, 0.16);
 }
 .composer textarea {
   flex: 1; border: none; background: none; resize: none;
@@ -1058,7 +1058,7 @@ input, textarea { font-family: inherit; }
 .auth-field input:focus,
 .auth-field select:focus {
   border-color: var(--sage-bright);
-  box-shadow: 0 0 0 4px rgba(201, 87, 127, 0.16);
+  box-shadow: 0 0 0 4px rgba(191, 63, 97, 0.16);
 }
 .auth-field__hint { font-size: 12px; color: var(--sage-deep); line-height: 1.5; margin: 8px 2px 0; }
 .gender-picker { display: flex; gap: 8px; }
