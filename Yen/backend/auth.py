@@ -1,4 +1,4 @@
-"""Password hashing and session tokens (JWT) for the An backend."""
+"""Password hashing and session tokens (JWT) for the Yên backend."""
 
 from __future__ import annotations
 

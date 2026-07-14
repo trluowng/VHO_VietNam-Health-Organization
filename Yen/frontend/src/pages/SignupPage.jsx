@@ -6,7 +6,6 @@ import { Cross } from '../components/icons.jsx'
 const GENDERS = [
   { value: 'nu', label: 'Nữ' },
   { value: 'nam', label: 'Nam' },
-  { value: 'khac', label: 'Khác' },
 ]
 
 const today = new Date()
@@ -70,12 +69,12 @@ export default function SignupPage() {
       <div className="auth-card">
         <Link to="/" className="brand auth-card__brand">
           <div className="brand__mark"><Cross /></div>
-          <div className="brand__name">An<em> · sức khỏe</em></div>
+          <div className="brand__name">Yên<em> · sức khỏe</em></div>
         </Link>
 
         <h1 className="auth-card__title">Tạo tài khoản</h1>
         <p className="auth-card__lede">
-          Lưu hồ sơ sức khỏe của bạn một lần — An sẽ nhớ để không hỏi lại tuổi, giới tính,
+          Lưu hồ sơ sức khỏe của bạn một lần — Yên sẽ nhớ để không hỏi lại tuổi, giới tính,
           bệnh nền mỗi lần trò chuyện.
         </p>
 

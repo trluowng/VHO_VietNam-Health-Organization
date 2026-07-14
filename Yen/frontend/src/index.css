@@ -1,32 +1,35 @@
 /* ============================================================
-   An — Conversational Symptom Triage Assistant
-   Aesthetic: "Apothecary Calm" — warm paper, eucalyptus sage,
-   deep pine ink, honey + terracotta triage signals.
+   Yên — Trợ lý y tế cá nhân
+   Aesthetic: "Serene Slate" — giấy xanh xám dịu, mực xanh than sâu,
+   thương hiệu xanh dương trầm ấm, hổ phách + đất nung cho tín hiệu triage.
    Fraunces (display serif) · Be Vietnam Pro (UI) · Spline Mono (labels)
+
+   Ghi chú: tên biến --sage/--mint-rail giữ nguyên từ bản gốc để tránh
+   phải sửa hàng trăm chỗ dùng — chỉ giá trị màu đổi sang tông xanh dương.
    ============================================================ */
 
 :root {
-  /* — Paper & ink — fresh mint — */
-  --paper: #d6e9da;
-  --paper-2: #c8e0cd;
-  --paper-warm: #e7f5ea;
-  --card: #f2fbf3;
-  --card-edge: #c9e2cf;
-  --ink: #14291f;       /* deep pine */
-  --ink-2: #324a3c;
-  --ink-soft: #54695b;
-  --ink-faint: #82978a;
+  /* — Paper & ink — xanh xám dịu — */
+  --paper: #d9e3ec;
+  --paper-2: #cbdae6;
+  --paper-warm: #eaf1f7;
+  --card: #f4f9fc;
+  --card-edge: #cbdce8;
+  --ink: #16232f;       /* xanh than sâu */
+  --ink-2: #33475a;
+  --ink-soft: #566b7d;
+  --ink-faint: #8598a8;
 
-  /* — Brand: fresh eucalyptus / mint — */
-  --sage: #3f8364;
-  --sage-deep: #29603f;
-  --sage-bright: #5bab84;
-  --sage-tint: #d2e9d7;
-  --sage-tint-2: #e1f3e6;
+  /* — Brand: xanh dương trầm ấm — */
+  --sage: #3a6d94;
+  --sage-deep: #244a68;
+  --sage-bright: #5c93bf;
+  --sage-tint: #d3e3ee;
+  --sage-tint-2: #e3eef5;
 
-  /* — Session-history mint rail — */
-  --mint-rail: #c4ddc9;
-  --mint-rail-2: #b6d4bc;
+  /* — Session-history rail — */
+  --mint-rail: #c7d7e3;
+  --mint-rail-2: #b9cbda;
 
   /* — Triage signals — */
   --green: #45975c;       /* self-care */
@@ -45,10 +48,10 @@
   --r-lg: 24px;
   --r-xl: 32px;
 
-  /* — Shadows: soft, diffuse, warm-tinted — */
-  --sh-1: 0 1px 2px rgba(40, 48, 38, 0.04), 0 4px 12px rgba(40, 48, 38, 0.05);
-  --sh-2: 0 2px 6px rgba(40, 48, 38, 0.06), 0 12px 34px rgba(40, 48, 38, 0.09);
-  --sh-3: 0 10px 24px rgba(28, 50, 40, 0.10), 0 32px 70px rgba(28, 50, 40, 0.16);
+  /* — Shadows: soft, diffuse, slate-tinted — */
+  --sh-1: 0 1px 2px rgba(22, 35, 47, 0.05), 0 4px 12px rgba(22, 35, 47, 0.06);
+  --sh-2: 0 2px 6px rgba(22, 35, 47, 0.07), 0 12px 34px rgba(22, 35, 47, 0.10);
+  --sh-3: 0 10px 24px rgba(18, 32, 44, 0.12), 0 32px 70px rgba(18, 32, 44, 0.18);
   --sh-inset: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
   --font-display: 'Fraunces', Georgia, serif;
@@ -103,10 +106,10 @@ input, textarea { font-family: inherit; }
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(42% 40% at 16% 14%, rgba(91, 171, 132, 0.28), transparent 70%),
-    radial-gradient(34% 40% at 88% 8%, rgba(69, 151, 92, 0.20), transparent 72%),
-    radial-gradient(48% 52% at 92% 90%, rgba(63, 131, 100, 0.22), transparent 70%),
-    radial-gradient(40% 44% at 8% 92%, rgba(120, 196, 150, 0.18), transparent 72%);
+    radial-gradient(42% 40% at 16% 14%, rgba(92, 147, 191, 0.28), transparent 70%),
+    radial-gradient(34% 40% at 88% 8%, rgba(58, 109, 148, 0.20), transparent 72%),
+    radial-gradient(48% 52% at 92% 90%, rgba(36, 74, 104, 0.22), transparent 70%),
+    radial-gradient(40% 44% at 8% 92%, rgba(120, 170, 210, 0.18), transparent 72%);
   filter: saturate(108%);
   animation: drift 26s ease-in-out infinite alternate;
 }
@@ -124,7 +127,7 @@ input, textarea { font-family: inherit; }
 .atmos__veil {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(214,233,218,0.0) 40%, rgba(200,224,205,0.55) 100%);
+  background: linear-gradient(180deg, rgba(217,227,236,0.0) 40%, rgba(203,218,230,0.55) 100%);
 }
 
 /* ============================================================
@@ -166,7 +169,7 @@ input, textarea { font-family: inherit; }
   content: '';
   position: absolute; inset: -6px;
   border-radius: 18px;
-  background: radial-gradient(circle, rgba(79,132,112,0.45), transparent 70%);
+  background: radial-gradient(circle, rgba(58,109,148,0.45), transparent 70%);
   z-index: -1;
   animation: breathe 4.5s var(--ease) infinite;
 }
@@ -247,7 +250,7 @@ input, textarea { font-family: inherit; }
   display: flex;
   flex-direction: column;
   background: linear-gradient(170deg, var(--mint-rail), var(--mint-rail-2));
-  border: 1px solid #b0cdb5;
+  border: 1px solid #a8c3d6;
   border-radius: var(--r-lg);
   box-shadow: var(--sh-1), var(--sh-inset);
   padding: 18px 16px;
@@ -255,7 +258,7 @@ input, textarea { font-family: inherit; }
 .history__label {
   font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase;
-  color: #3a6048; margin: 2px 4px 14px;
+  color: #2c4f6b; margin: 2px 4px 14px;
 }
 .history__new {
   display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -277,7 +280,7 @@ input, textarea { font-family: inherit; }
   width: 100%; text-align: left;
   background: none; border: none;
   padding: 11px 12px; border-radius: 12px;
-  color: #2f4f3a;
+  color: #24435a;
   transition: background 0.18s, transform 0.16s var(--ease);
 }
 .history__item:hover { background: rgba(255,255,255,0.45); }
@@ -294,14 +297,14 @@ input, textarea { font-family: inherit; }
   font-size: 13.5px; font-weight: 500; color: var(--ink);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.history__when { font-size: 11px; color: #5c7a64; font-family: var(--font-mono); }
-.history__ic { color: #6e8c75; flex: none; }
+.history__when { font-size: 11px; color: #55738a; font-family: var(--font-mono); }
+.history__ic { color: #6485a0; flex: none; }
 .history__foot {
-  font-size: 10.5px; color: #5c7a64; line-height: 1.4;
+  font-size: 10.5px; color: #55738a; line-height: 1.4;
   margin: 14px 4px 2px; opacity: 0.85;
 }
 .history__empty {
-  font-size: 12px; color: #4f6c57; line-height: 1.5;
+  font-size: 12px; color: #4a6780; line-height: 1.5;
   padding: 6px 8px; font-style: italic; opacity: 0.9;
 }
 
@@ -378,7 +381,7 @@ input, textarea { font-family: inherit; }
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 13px; font-weight: 500; color: var(--sage-deep);
   background: var(--sage-tint-2);
-  border: 1px solid #d4e0cf;
+  border: 1px solid #d0e0ea;
   padding: 6px 12px; border-radius: 100px;
 }
 .chip__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage-bright); }
@@ -406,7 +409,7 @@ input, textarea { font-family: inherit; }
 .panel__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .edit-toggle {
   font-size: 12px; font-weight: 600; color: var(--sage-deep);
-  background: var(--sage-tint-2); border: 1px solid #cae0cf;
+  background: var(--sage-tint-2); border: 1px solid #cbdfec;
   padding: 4px 12px; border-radius: 100px;
   transition: background 0.18s, transform 0.16s var(--ease);
 }
@@ -516,7 +519,7 @@ input, textarea { font-family: inherit; }
   border-radius: var(--r-md);
   transition: transform 0.18s var(--ease), box-shadow 0.2s, border-color 0.2s;
 }
-.example-card:hover { transform: translateY(-2px); box-shadow: var(--sh-1); border-color: #d8cdb6; }
+.example-card:hover { transform: translateY(-2px); box-shadow: var(--sh-1); border-color: #c9d9e6; }
 .example-card__ic {
   width: 34px; height: 34px; flex: none; border-radius: 10px;
   display: grid; place-items: center; font-size: 17px;
@@ -575,7 +578,7 @@ input, textarea { font-family: inherit; }
   padding: 2px 8px; border-radius: 100px;
   border: 1px solid transparent;
 }
-.run-tag.gemini { background: var(--sage-tint-2); color: var(--sage-deep); border-color: #cce0d1; }
+.run-tag.gemini { background: var(--sage-tint-2); color: var(--sage-deep); border-color: #cfe0ec; }
 .run-tag.rule { background: var(--paper-2); color: var(--ink-faint); }
 .pulse-dot.is-idle { background: var(--ink-faint); animation: none; box-shadow: none; }
 .bubble strong { font-weight: 600; }
@@ -608,7 +611,7 @@ input, textarea { font-family: inherit; }
 .quick-chip {
   font-size: 13.5px; font-weight: 500; color: var(--sage-deep);
   background: var(--card);
-  border: 1.5px solid #cfdcca;
+  border: 1.5px solid #cddce8;
   padding: 9px 16px; border-radius: 100px;
   transition: transform 0.16s var(--ease), background 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
@@ -798,7 +801,7 @@ input, textarea { font-family: inherit; }
 }
 .composer__inner:focus-within {
   border-color: var(--sage-bright);
-  box-shadow: 0 0 0 4px rgba(79, 132, 112, 0.12);
+  box-shadow: 0 0 0 4px rgba(58, 109, 148, 0.14);
 }
 .composer textarea {
   flex: 1; border: none; background: none; resize: none;
@@ -1055,7 +1058,7 @@ input, textarea { font-family: inherit; }
 .auth-field input:focus,
 .auth-field select:focus {
   border-color: var(--sage-bright);
-  box-shadow: 0 0 0 4px rgba(79, 132, 112, 0.12);
+  box-shadow: 0 0 0 4px rgba(58, 109, 148, 0.14);
 }
 .auth-field__hint { font-size: 12px; color: var(--sage-deep); line-height: 1.5; margin: 8px 2px 0; }
 .gender-picker { display: flex; gap: 8px; }

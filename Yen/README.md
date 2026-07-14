@@ -1,8 +1,8 @@
-# An · Trợ lý y tế cá nhân
+# Yên · Trợ lý y tế cá nhân
 
-> Trợ lý phân loại triệu chứng — mô tả bằng ngôn ngữ tự nhiên, An xác nhận lại điều đã
+> Trợ lý phân loại triệu chứng — mô tả bằng ngôn ngữ tự nhiên, Yên xác nhận lại điều đã
 > hiểu, hỏi thêm khi cần, rồi đưa ra **mức độ khẩn cấp + bước tiếp theo** kèm độ chắc
-> chắn và lý do. Có tài khoản + hồ sơ sức khỏe (tuổi, giới tính, bệnh nền, dị ứng) để An
+> chắn và lý do. Có tài khoản + hồ sơ sức khỏe (tuổi, giới tính, bệnh nền, dị ứng) để Yên
 > nhớ mà không hỏi lại mỗi lần, cộng thêm lịch theo dõi sức khỏe (tài khoản nữ có thêm
 > tab theo dõi chu kỳ kinh nguyệt). Lấy cảm hứng & cải tiến từ Ada Health (track Healthcare).
 
@@ -19,7 +19,7 @@ Prototype cho Day 06 — built với React + Vite + Framer Motion (frontend), Fa
 
 ```bash
 # 1) Backend — cài deps + điền key
-cd An/backend
+cd Yen/backend
 pip install -r requirements.txt
 cp .env.example .env                # điền GEMINI_API_KEY (xem phần Gemini bên dưới)
 
@@ -41,7 +41,7 @@ bằng `python server.py` như bình thường).
 
 ## 3 luồng demo (bấm thẳng các ví dụ ở màn hình chào)
 
-| Đường đi | Nhập thử | An phản hồi |
+| Đường đi | Nhập thử | Yên phản hồi |
 |---|---|---|
 | 🟡 **Happy** | `Tôi bị sốt 38.5 độ và đau họng 2 ngày nay` → bấm **Có** | Xác nhận triệu chứng → 1 câu hỏi → kết quả **Gặp bác sĩ trong 24h** (88% chắc chắn) + lý do + việc nên làm |
 | 🟢 **Low-confidence** | `Tôi thấy mệt và hơi chóng mặt` → trả lời các câu hỏi | Nhận ra mô tả mơ hồ → giữ **Độ chắc chắn: Thấp**, liệt kê **thông tin còn thiếu**, khuyến nghị theo dõi tại nhà |
@@ -54,9 +54,10 @@ Mọi kết quả luôn kèm disclaimer **"Đây không phải chẩn đoán y k
 
 ## Thiết kế & kiến trúc
 
-- **Aesthetic "Apothecary Calm"** — nền giấy ấm, xanh khuynh diệp (eucalyptus), tín hiệu
-  triage xanh/hổ phách/đất nung. Font **Fraunces** (display serif) + **Be Vietnam Pro**
-  (UI, hỗ trợ tiếng Việt đầy đủ) + **Spline Sans Mono** (nhãn). Tránh "AI slop".
+- **Aesthetic "Serene Slate"** — nền giấy xanh xám dịu, mực xanh than sâu, thương hiệu
+  xanh dương trầm ấm, tín hiệu triage xanh/hổ phách/đất nung. Font **Fraunces** (display
+  serif) + **Be Vietnam Pro** (UI, hỗ trợ tiếng Việt đầy đủ) + **Spline Sans Mono** (nhãn).
+  Tránh "AI slop".
 - **Rail hồ sơ phiên** (trái): vòng tròn độ chắc chắn động, chip triệu chứng AI ghi nhận,
   thông tin còn thiếu, disclaimer — đúng yêu cầu "xác nhận lại điều AI đã hiểu" trong SPEC.
 - **Khu chat** (phải): hội thoại, nút trả lời nhanh, kết quả triage in-thread, overlay
@@ -93,10 +94,10 @@ backend/
 
 ## Tài khoản & hồ sơ sức khỏe
 
-- Đăng ký cần **tuổi** + **giới tính** (nam/nữ/khác); bệnh nền, dị ứng, thuốc đang dùng có
-  thể bổ sung sau qua `PUT /profile`.
+- Đăng ký cần **ngày sinh** (tự tính tuổi) + **giới tính** (nam/nữ); bệnh nền, dị ứng,
+  thuốc đang dùng có thể bổ sung sau qua `PUT /profile`.
 - Mỗi lượt chat gửi kèm `Authorization: Bearer <token>` — backend tự nạp hồ sơ vào context
-  cho Gemini (xem `_profile_context_message()` trong `server.py`), nên An **không hỏi lại**
+  cho Gemini (xem `_profile_context_message()` trong `server.py`), nên Yên **không hỏi lại**
   tuổi/giới tính/bệnh nền/dị ứng đã biết.
 - **Tài khoản nữ tự động có thêm sub-tab "Chu kỳ kinh nguyệt"** trong mục Lịch — không hỏi
   bật/tắt, chỉ dựa vào `gender === 'nu'`. Ghi ngày bắt đầu kỳ kinh → hệ thống tự tính chu kỳ
@@ -130,7 +131,7 @@ backend/
 ### Chạy AI THẬT bằng Gemini (cho điểm "AI chạy thật trong ≥1 flow")
 
 ```bash
-cd An/backend
+cd Yen/backend
 cp .env.example .env    # điền GEMINI_API_KEY — lấy tại https://aistudio.google.com/apikey
 ```
 

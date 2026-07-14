@@ -43,7 +43,7 @@ export default function Composer({ onSend, disabled, locked }) {
         </button>
       </div>
       <div className="composer__hint">
-        An là prototype hỗ trợ — không thay thế chẩn đoán y khoa · Enter để gửi
+        Yên là prototype hỗ trợ — không thay thế chẩn đoán y khoa · Enter để gửi
       </div>
     </div>
   )

@@ -14,11 +14,11 @@ function persistError(kind, detail) {
   }
 }
 window.addEventListener('error', (e) => {
-  console.error('[An] window.onerror:', e.error || e.message)
+  console.error('[Yên] window.onerror:', e.error || e.message)
   persistError('error', { message: String(e.message), stack: e.error?.stack })
 })
 window.addEventListener('unhandledrejection', (e) => {
-  console.error('[An] unhandledrejection:', e.reason)
+  console.error('[Yên] unhandledrejection:', e.reason)
   persistError('promise', { message: String(e.reason?.message || e.reason), stack: e.reason?.stack })
 })
 

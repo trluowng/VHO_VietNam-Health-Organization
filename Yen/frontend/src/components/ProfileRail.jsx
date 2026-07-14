@@ -157,7 +157,7 @@ export default function ProfileRail({ session, onEditSymptoms }) {
               ))}
             </div>
 
-            {editing && <p className="edit-hint">Bấm ✕ để xoá hoặc “＋ Thêm” nếu mình hiểu sai triệu chứng. An sẽ đánh giá lại.</p>}
+            {editing && <p className="edit-hint">Bấm ✕ để xoá hoặc “＋ Thêm” nếu mình hiểu sai triệu chứng. Yên sẽ đánh giá lại.</p>}
 
             {factChips.length > 0 && (
               <div className="chips" style={{ marginTop: 10 }}>
@@ -203,7 +203,7 @@ export default function ProfileRail({ session, onEditSymptoms }) {
         <div className="disclaimer">
           <Shield />
           <span>
-            <strong>An không đưa ra chẩn đoán y khoa.</strong> Đây là công cụ phân loại mức độ khẩn cấp để giúp bạn
+            <strong>Yên không đưa ra chẩn đoán y khoa.</strong> Đây là công cụ phân loại mức độ khẩn cấp để giúp bạn
             quyết định bước tiếp theo. Khi nghi ngờ, hãy liên hệ nhân viên y tế.
           </span>
         </div>

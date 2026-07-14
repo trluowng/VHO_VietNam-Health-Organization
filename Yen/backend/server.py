@@ -1,5 +1,5 @@
 """
-An — HTTP server
+Yên — HTTP server
 =================
 Cầu nối giữa frontend React và logic agent trong chat.py, cộng thêm tài
 khoản người dùng + hồ sơ sức khỏe + lịch theo dõi sức khỏe/chu kỳ kinh nguyệt.
@@ -19,10 +19,10 @@ khoản người dùng + hồ sơ sức khỏe + lịch theo dõi sức khỏe/c
 - DELETE /cycle/{id}           (auth)
 
 Chạy:
-    cd An/backend
+    cd Yen/backend
     python server.py                    # mặc định http://localhost:8787
 
-Rồi ở frontend (An/frontend/.env):  VITE_TRIAGE_API_URL=http://localhost:8787/triage
+Rồi ở frontend (Yen/frontend/.env):  VITE_TRIAGE_API_URL=http://localhost:8787/triage
 """
 from __future__ import annotations
 
@@ -70,9 +70,9 @@ SELECTED_MODEL = MODEL or getattr(PROVIDER, "default_model", None)
 TRANSCRIPTS_DIR = ROOT / "transcripts"
 VERSION = os.getenv("TRIAGE_VERSION", "server")
 
-GENDERS = {"nam", "nu", "khac"}
+GENDERS = {"nam", "nu"}
 
-app = FastAPI(title="An Triage Server")
+app = FastAPI(title="Yên Triage Server")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -135,7 +135,7 @@ def _profile_context_message(user_id: str) -> dict | None:
     parts = []
     if profile.get("age") is not None:
         parts.append(f"Tuổi: {profile['age']}")
-    gender_label = {"nam": "Nam", "nu": "Nữ", "khac": "Khác"}.get(profile.get("gender") or "")
+    gender_label = {"nam": "Nam", "nu": "Nữ"}.get(profile.get("gender") or "")
     if gender_label:
         parts.append(f"Giới tính: {gender_label}")
     if profile.get("chronic_conditions"):
@@ -490,7 +490,7 @@ def delete_cycle_entry(entry_id: str, authorization: str | None = Header(None)) 
 def main() -> None:
     import uvicorn
 
-    print(f"An server -> http://localhost:{PORT}")
+    print(f"Yên server -> http://localhost:{PORT}")
     print(f"  provider={PROVIDER_NAME}  model={SELECTED_MODEL}")
     print(f"  history_window={HISTORY_WINDOW}  max_tool_rounds={MAX_TOOL_ROUNDS}")
     uvicorn.run(app, host="0.0.0.0", port=PORT)

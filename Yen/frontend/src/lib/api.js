@@ -1,5 +1,5 @@
 /* ============================================================
-   api.js — client gọi backend An (auth, hồ sơ sức khỏe, lịch, chu kỳ)
+   api.js — client gọi backend Yên (auth, hồ sơ sức khỏe, lịch, chu kỳ)
    ============================================================ */
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '')

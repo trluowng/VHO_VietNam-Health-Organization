@@ -36,7 +36,7 @@ export default function LoginPage() {
       <div className="auth-card">
         <Link to="/" className="brand auth-card__brand">
           <div className="brand__mark"><Cross /></div>
-          <div className="brand__name">An<em> · sức khỏe</em></div>
+          <div className="brand__name">Yên<em> · sức khỏe</em></div>
         </Link>
 
         <h1 className="auth-card__title">Đăng nhập</h1>

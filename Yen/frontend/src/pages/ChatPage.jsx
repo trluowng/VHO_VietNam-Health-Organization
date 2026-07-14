@@ -151,7 +151,7 @@ export default function ChatPage() {
         await playEvents(data.events || [], { ms, source: 'gemini' })
       } catch (err) {
         setTyping(false)
-        console.warn('[An] Backend lỗi, dùng rule-based engine:', err?.message || err)
+        console.warn('[Yên] Backend lỗi, dùng rule-based engine:', err?.message || err)
         const { session: ns, events } = handleUser(session, text)
         setSession(ns)
         await playEvents(events, { source: 'rule' })
@@ -278,7 +278,7 @@ export default function ChatPage() {
           <div className="brand">
             <div className="brand__mark"><Cross /></div>
             <div>
-              <div className="brand__name">An<em> · sức khỏe</em></div>
+              <div className="brand__name">Yên<em> · sức khỏe</em></div>
               <div className="brand__sub">Symptom Triage Assistant</div>
             </div>
           </div>

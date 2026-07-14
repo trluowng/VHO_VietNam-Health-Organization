@@ -58,13 +58,13 @@ flowchart TD
 - **Output:** tư vấn/hướng dẫn tự chăm sóc cho tình huống bình thường; cảnh báo đỏ + hướng
   dẫn gọi 115 cho tình huống khẩn cấp.
 - Có **tài khoản + hồ sơ sức khỏe** (tuổi, giới tính, bệnh nền, dị ứng, thuốc đang dùng) —
-  đăng nhập rồi thì An không hỏi lại các thông tin đã biết ở mỗi phiên chat mới.
+  đăng nhập rồi thì Yên không hỏi lại các thông tin đã biết ở mỗi phiên chat mới.
 - Chat hỏi triệu chứng nhiều vòng, mỗi câu trả lời luôn kèm gợi ý cụ thể (không để bệnh nhân
   chờ mà không có hướng dẫn gì — xem mục 13.3/2.2).
 - Sàng lọc red-flag bằng từ khóa **ngay tại client** trước khi gọi LLM, để tình huống khẩn
   cấp không phải chờ round-trip API (xem mục 15.2).
-- Code: [`An/`](An/) — backend FastAPI + Gemini + SQLite (`An/backend`), frontend
-  (`An/frontend`, gồm landing page, đăng ký/đăng nhập, chat, lịch).
+- Code: [`Yen/`](Yen/) — backend FastAPI + Gemini + SQLite (`Yen/backend`), frontend
+  (`Yen/frontend`, gồm landing page, đăng ký/đăng nhập, chat, lịch).
 - Deploy lên Render — xem [`DEPLOY.md`](DEPLOY.md).
 
 ### 2. Giám sát sinh hiệu real-time — 🔲 Chưa làm
@@ -163,17 +163,17 @@ Thu thập dữ liệu:
 
 ---
 
-## 2.1.1. AI Chat prototype — "An"
+## 2.1.1. AI Chat prototype — "Yên"
 
 Song song với thiết kế pipeline ở mục 2.2/13, có một **prototype thật** của AI Health Chat
-đặt trong [`An/`](An/) — trợ lý phân loại triệu chứng: hỏi tối đa 3 câu, xác nhận lại điều
+đặt trong [`Yen/`](Yen/) — trợ lý phân loại triệu chứng: hỏi tối đa 3 câu, xác nhận lại điều
 đã hiểu, rồi đưa ra mức khẩn cấp + bước tiếp theo kèm độ chắc chắn (React + Vite, backend
 FastAPI + Gemini thật qua tool-calling, sàng lọc red-flag tại client trước khi gọi LLM).
 Có tài khoản + hồ sơ sức khỏe (SQLite) và lịch theo dõi sức khỏe/chu kỳ kinh nguyệt — xem
-mục 1.1 ở đầu tài liệu. Chi tiết — xem [`An/README.md`](An/README.md).
+mục 1.1 ở đầu tài liệu. Chi tiết — xem [`Yen/README.md`](Yen/README.md).
 
 > Trước đó có thử ghép thêm một UI mô phỏng đồng hồ đeo tay (wearable simulator +
-> watch-face) nối vào An qua một tool đọc sinh hiệu. Đã bỏ để tập trung hoàn thiện An
+> watch-face) nối vào Yên qua một tool đọc sinh hiệu. Đã bỏ để tập trung hoàn thiện Yên
 > trước — có thể làm lại khi tới lượt ưu tiên #2 ở mục 1.1.
 
 ---

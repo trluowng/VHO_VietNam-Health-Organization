@@ -21,7 +21,7 @@ export default function CalendarPage() {
           <div className="brand">
             <div className="brand__mark"><Cross /></div>
             <div>
-              <div className="brand__name">An<em> · sức khỏe</em></div>
+              <div className="brand__name">Yên<em> · sức khỏe</em></div>
               <div className="brand__sub">Lịch theo dõi sức khỏe</div>
             </div>
           </div>

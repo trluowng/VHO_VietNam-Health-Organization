@@ -1,7 +1,7 @@
 /* ============================================================
    triageEngine.js
    ------------------------------------------------------------
-   "AI" lõi của An — Conversational Symptom Triage Assistant.
+   "AI" lõi của Yên — Conversational Symptom Triage Assistant.
 
    Mặc định: rule-based engine mô phỏng hành vi AI, đủ để demo
    4 paths trong SPEC (Happy / Low-confidence / Red-flag / Correction).
@@ -452,13 +452,13 @@ export function setSymptoms(prev, symptoms) {
 /* ============================================================
    Gắn AI THẬT (Google Gemini) — tùy chọn
    ------------------------------------------------------------
-   Frontend KHÔNG giữ API key. Backend Gemini nằm ở An/backend/
+   Frontend KHÔNG giữ API key. Backend Gemini nằm ở Yen/backend/
    (server.py) — gọi Gemini với system prompt triage và trả về cùng
    schema { events, profile } mà UI dùng. Nếu có token đăng nhập, backend
    tự nạp hồ sơ sức khỏe (tuổi/giới tính/bệnh nền/chu kỳ) vào ngữ cảnh.
 
    Bật: trỏ VITE_API_BASE_URL → http://localhost:8787
-   (xem .env.example và An/README.md chi tiết). Lỗi → App tự fallback.
+   (xem .env.example và Yen/README.md chi tiết). Lỗi → App tự fallback.
    ============================================================ */
 export async function callRealModel(history, userText, token) {
   const base = import.meta.env.VITE_API_BASE_URL

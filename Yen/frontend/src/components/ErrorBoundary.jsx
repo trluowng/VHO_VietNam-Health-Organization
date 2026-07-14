@@ -15,8 +15,8 @@ export default class ErrorBoundary extends Component {
   componentDidCatch(error, info) {
     const componentStack = info?.componentStack || ''
     // Ghi log ra console + localStorage để dò vết
-    console.error('[An] App lỗi:', error)
-    console.error('[An] Component stack:', componentStack)
+    console.error('[Yên] App lỗi:', error)
+    console.error('[Yên] Component stack:', componentStack)
     this.setState({ stack: (error?.stack || '') + '\n\nComponent stack:' + componentStack })
     try {
       localStorage.setItem(
@@ -51,7 +51,7 @@ export default class ErrorBoundary extends Component {
               <path d="M12 4l9 16H3l9-16z" /><path d="M12 10v4M12 17.4v.2" />
             </svg>
           </div>
-          <h1 className="errbox__title">An gặp sự cố</h1>
+          <h1 className="errbox__title">Yên gặp sự cố</h1>
           <p className="errbox__msg">
             Giao diện vừa gặp một lỗi không mong muốn. Dữ liệu phiên của bạn vẫn được lưu cục bộ.
             Bạn có thể tải lại trang để tiếp tục.
