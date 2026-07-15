@@ -54,8 +54,8 @@ Mọi kết quả luôn kèm disclaimer **"Đây không phải chẩn đoán y k
 
 ## Thiết kế & kiến trúc
 
-- **Aesthetic "Blood Blush"** — nền giấy hồng phấn ánh đỏ máu, mực nâu mận sâu, thương hiệu
-  hồng pha đỏ máu, tín hiệu triage xanh/hổ phách/đất nung. Font **Fraunces** (display
+- **Aesthetic "Clarity Teal"** — nền giấy xanh ngọc lam nhạt, mực xanh than sâu, thương hiệu
+  xanh dương/ngọc lam, tín hiệu triage xanh lá/hổ phách/đất nung. Font **Fraunces** (display
   serif) + **Be Vietnam Pro** (UI, hỗ trợ tiếng Việt đầy đủ) + **Spline Sans Mono** (nhãn).
   Tránh "AI slop".
 - **Rail hồ sơ phiên** (trái): vòng tròn độ chắc chắn động, chip triệu chứng AI ghi nhận,

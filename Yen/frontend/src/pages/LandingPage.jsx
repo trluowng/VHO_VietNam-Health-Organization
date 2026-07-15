@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
-import { Cross, Stethoscope, Watch, Quiz, Calendar, Phone, ArrowRight, Shield } from '../components/icons.jsx'
+import {
+  Cross, Stethoscope, Watch, Quiz, Calendar, Phone, ArrowRight, Shield,
+  Sparkle, Clock, Check, Heart, Smile, Leaf, Pulse, Chat,
+} from '../components/icons.jsx'
 
 const FEATURES = [
   {
@@ -50,21 +53,52 @@ export default function LandingPage() {
         </nav>
       </header>
 
-      <main className="landing__hero">
-        <span className="hero__eyebrow">TRỢ LÝ Y TẾ AI CÁ NHÂN</span>
-        <h1 className="landing__title">
-          Chăm sóc sức khỏe <em>chủ động</em>, có mặt mọi lúc bạn cần
-        </h1>
-        <p className="landing__lede">
-          Yên tư vấn triệu chứng bằng hội thoại tự nhiên, ghi nhớ hồ sơ sức khỏe của riêng
-          bạn để không phải hỏi lại từ đầu mỗi lần, và luôn ưu tiên tính mạng — phát hiện
-          dấu hiệu khẩn cấp là hướng dẫn gọi 115 ngay lập tức.
-        </p>
-        <div className="landing__cta-row">
-          <Link to="/dang-ky" className="btn btn--primary btn--lg">
-            Tạo tài khoản miễn phí <ArrowRight width={17} height={17} />
-          </Link>
-          <Link to="/dang-nhap" className="btn btn--ghost btn--lg">Tôi đã có tài khoản</Link>
+      <main className="landing__hero landing__hero--split">
+        <div className="hero__copy">
+          <span className="hero__eyebrow">TRỢ LÝ Y TẾ AI CÁ NHÂN</span>
+          <h1 className="landing__title">
+            Chăm sóc sức khỏe <em>chủ động</em>, có mặt mọi lúc bạn cần
+          </h1>
+          <p className="landing__lede">
+            Yên tư vấn triệu chứng bằng hội thoại tự nhiên, ghi nhớ hồ sơ sức khỏe của riêng
+            bạn để không phải hỏi lại từ đầu mỗi lần, và luôn ưu tiên tính mạng — phát hiện
+            dấu hiệu khẩn cấp là hướng dẫn gọi 115 ngay lập tức.
+          </p>
+          <div className="landing__cta-row">
+            <Link to="/dang-ky" className="btn btn--primary btn--lg">
+              <Sparkle width={15} height={15} /> Tạo tài khoản miễn phí <ArrowRight width={17} height={17} />
+            </Link>
+            <Link to="/dang-nhap" className="btn btn--ghost btn--lg">
+              <Clock width={16} height={16} /> Tôi đã có tài khoản
+            </Link>
+          </div>
+          <div className="trust-row">
+            <span><Shield width={15} height={15} /> Bảo mật tuyệt đối</span>
+            <span><Check width={15} height={15} /> Dễ sử dụng</span>
+            <span><Heart width={15} height={15} /> Đồng hành tin cậy</span>
+          </div>
+        </div>
+
+        <div className="hero-illustration" aria-hidden="true">
+          <div className="hero-illustration__blob" />
+          <div className="hero-illustration__leaves">
+            <span className="leaf-wrap leaf-wrap--1"><Leaf className="leaf" /></span>
+            <span className="leaf-wrap leaf-wrap--2"><Leaf className="leaf" /></span>
+            <span className="leaf-wrap leaf-wrap--3 is-flipped"><Leaf className="leaf" /></span>
+          </div>
+          <div className="hero-illustration__card">
+            <div className="hero-illustration__avatar"><Smile width={20} height={20} /></div>
+            <div>
+              <p className="hero-illustration__card-title">Xin chào, tôi là Yên</p>
+              <p className="hero-illustration__card-sub">Tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn 24/7</p>
+            </div>
+            <Heart className="hero-illustration__card-heart" width={15} height={15} />
+          </div>
+          <div className="hero-illustration__chips">
+            <span><Pulse width={18} height={18} /></span>
+            <span><Shield width={18} height={18} /></span>
+            <span><Chat width={18} height={18} /></span>
+          </div>
         </div>
       </main>
 
@@ -79,6 +113,7 @@ export default function LandingPage() {
             </div>
             <h3 className="feature-card__title">{f.title}</h3>
             <p className="feature-card__desc">{f.desc}</p>
+            <span className="feature-card__arrow"><ArrowRight width={15} height={15} /></span>
           </div>
         ))}
       </section>

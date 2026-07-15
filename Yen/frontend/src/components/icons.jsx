@@ -75,6 +75,35 @@ export const User = (p) => (
     <path {...S} d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5" />
   </svg>
 )
+export const Sparkle = (p) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
+    <path d="M12 3l1.8 5.6L19.5 10.4l-5.7 1.8L12 18l-1.8-5.8L4.5 10.4l5.7-1.8L12 3zM19 15.5l.9 2.7 2.7.9-2.7.9-.9 2.7-.9-2.7-2.7-.9 2.7-.9.9-2.7z" />
+  </svg>
+)
+export const Clock = (p) => (
+  <svg viewBox="0 0 24 24" {...p}><circle {...S} cx="12" cy="12" r="9" /><path {...S} d="M12 7v5l3.5 2" /></svg>
+)
+export const Check = (p) => (
+  <svg viewBox="0 0 24 24" {...p}><circle {...S} cx="12" cy="12" r="9" /><path {...S} d="M8 12.3l2.6 2.6L16 9.5" /></svg>
+)
+export const Heart = (p) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
+    <path d="M12 20.2s-7.4-4.6-9.9-9.1C.5 7.7 1.8 4.3 5 3.4c2-.6 4 .2 5 1.9 1-1.7 3-2.5 5-1.9 3.2.9 4.5 4.3 2.9 7.7-2.5 4.5-9.9 9.1-9.9 9.1z" />
+  </svg>
+)
+export const Smile = (p) => (
+  <svg viewBox="0 0 24 24" {...p}>
+    <circle {...S} cx="12" cy="12" r="9" />
+    <path {...S} d="M8.3 13.5c1 1.4 2.2 2.1 3.7 2.1s2.7-.7 3.7-2.1" />
+    <path {...S} d="M9 10v.2M15 10v.2" />
+  </svg>
+)
+export const Leaf = (p) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
+    <path d="M4 20c0-9 6.5-15.5 16-16 .3 9.5-6 16-15 16-.4 0-.7 0-1 0z" />
+    <path fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1.2" strokeLinecap="round" d="M6.5 18C11 13.5 14.5 10 17.5 6" />
+  </svg>
+)
 export const Quiz = (p) => (
   <svg viewBox="0 0 24 24" {...p}>
     <circle {...S} cx="12" cy="12" r="9" />
