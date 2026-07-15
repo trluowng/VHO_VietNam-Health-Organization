@@ -63,7 +63,11 @@ PORT = int(os.getenv("PORT", os.getenv("TRIAGE_PORT", "8787")))
 
 SYSTEM_PROMPT = (ARTIFACTS_DIR / "system_prompt.md").read_text(encoding="utf-8")
 TOOL_DECLARATIONS = load_tool_declarations(ARTIFACTS_DIR / "tools.yaml")
-OPENAI_TOOLS = to_openai_tools(TOOL_DECLARATIONS)
+# Triage chỉ cần "clarify" (hỏi lại bệnh nhân). lookup/fetch/format là tool nghiên cứu
+# web sót lại từ template gốc — không cần cho tư vấn triệu chứng, và mỗi lần model gọi
+# thêm 1 vòng round-trip Gemini nữa (chậm hẳn), nên bỏ khỏi danh sách tool đưa cho model.
+TRIAGE_TOOL_NAMES = {"clarify"}
+OPENAI_TOOLS = [t for t in to_openai_tools(TOOL_DECLARATIONS) if t["function"]["name"] in TRIAGE_TOOL_NAMES]
 PROVIDER = make_provider(PROVIDER_NAME)
 SELECTED_MODEL = MODEL or getattr(PROVIDER, "default_model", None)
 
