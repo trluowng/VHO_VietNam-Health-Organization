@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import ErrorBoundary from './components/ErrorBoundary.jsx'
 import './index.css'
+import './tailwind.css'
 
 // Bắt lỗi runtime ngoài React (async, sự kiện) — ghi log để dò vết.
 function persistError(kind, detail) {

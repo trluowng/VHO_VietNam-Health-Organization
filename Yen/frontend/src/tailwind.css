@@ -1,0 +1,6 @@
+/* Tailwind layer for the landing page components only (src/components/landing/**).
+   Preflight is disabled in tailwind.config.js so this coexists with the
+   hand-rolled design system in index.css without resetting it globally. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

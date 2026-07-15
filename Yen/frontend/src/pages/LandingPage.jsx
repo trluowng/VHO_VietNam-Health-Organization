@@ -1,133 +1,72 @@
-import { Link } from 'react-router-dom'
-import {
-  Cross, Stethoscope, Watch, Quiz, Calendar, Phone, ArrowRight, Shield,
-  Sparkle, Clock, Check, Heart, Smile, Leaf, Pulse, Chat,
-} from '../components/icons.jsx'
+import { PhoneCall, ShieldAlert, Stethoscope, Watch, HelpCircle, Calendar } from 'lucide-react'
+import Header from '../components/landing/Header.jsx'
+import HeroSection from '../components/landing/HeroSection.jsx'
+import FeatureCard from '../components/landing/FeatureCard.jsx'
 
 const FEATURES = [
   {
-    icon: <Stethoscope />,
+    icon: Stethoscope,
+    iconBg: 'bg-skytint-bg',
+    iconColor: 'text-cyan',
+    status: 'Đã có',
     title: 'Tư vấn triệu chứng AI',
-    desc: 'Mô tả triệu chứng bằng lời nói tự nhiên — Yên hỏi thêm khi cần, rồi đưa ra hướng xử trí kèm độ chắc chắn.',
+    desc: 'Hỏi đáp triệu chứng bằng hội thoại tự nhiên, chính xác và dễ hiểu.',
+  },
+  {
+    icon: Watch,
+    iconBg: 'bg-rose-50',
+    iconColor: 'text-rose-500',
     status: 'Đã có',
+    title: 'Giám sát sức khỏe mỗi ngày',
+    desc: 'Theo dõi chỉ số, nhắc lịch uống thuốc và cảnh báo bất thường.',
   },
   {
-    icon: <Watch />,
-    title: 'Giám sát sinh hiệu real-time',
-    desc: 'Theo dõi nhịp tim, chỉ số cơ thể mỗi ngày từ đồng hồ đeo tay, lưu thành nhật ký theo từng thời điểm.',
-    status: 'Sắp ra mắt',
-  },
-  {
-    icon: <Quiz />,
-    title: 'Quiz sơ cứu khẩn cấp',
-    desc: 'Học cách xử trí tại chỗ cho vài tình huống khẩn cấp thường gặp — ngất xỉu, chảy máu, hóc dị vật...',
-    status: 'Sắp ra mắt',
-  },
-  {
-    icon: <Calendar />,
-    title: 'Lịch theo dõi sức khỏe',
-    desc: 'Ghi nhận đo lường định kỳ theo thời gian; tài khoản nữ có thêm mục theo dõi chu kỳ kinh nguyệt riêng.',
+    icon: HelpCircle,
+    iconBg: 'bg-violet-50',
+    iconColor: 'text-violet-500',
     status: 'Đã có',
+    title: 'Quản lý sức khỏe tổng thể',
+    desc: 'Lưu trữ hồ sơ, lịch sử bệnh và gợi ý chăm sóc cá nhân hóa.',
+  },
+  {
+    icon: Calendar,
+    iconBg: 'bg-statusgreen-bg',
+    iconColor: 'text-statusgreen',
+    status: 'Đã có',
+    title: 'Lịch khám & lời nhắc',
+    desc: 'Nhắc lịch khám, tiêm chủng, tái khám và chăm sóc định kỳ.',
   },
 ]
 
 export default function LandingPage() {
   return (
-    <div className="landing">
-      <div className="atmos">
-        <div className="atmos__grain" />
-        <div className="atmos__veil" />
+    <div className="relative h-[100dvh] overflow-y-auto bg-gradient-to-br from-white via-white to-skytint-bg">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -right-40 top-0 h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(28,159,227,0.14),transparent_70%)] blur-2xl" />
       </div>
 
-      <header className="landing__nav">
-        <div className="brand">
-          <div className="brand__mark"><Cross /></div>
-          <div>
-            <div className="brand__name">Yên<em> · sức khỏe</em></div>
-            <div className="brand__sub">AI Y tế cá nhân</div>
-          </div>
-        </div>
-        <nav className="landing__nav-actions">
-          <Link to="/dang-nhap" className="btn btn--ghost">Đăng nhập</Link>
-          <Link to="/dang-ky" className="btn btn--primary">Bắt đầu miễn phí</Link>
-        </nav>
-      </header>
+      <Header />
+      <HeroSection />
 
-      <main className="landing__hero landing__hero--split">
-        <div className="hero__copy">
-          <span className="hero__eyebrow">TRỢ LÝ Y TẾ AI CÁ NHÂN</span>
-          <h1 className="landing__title">
-            Chăm sóc sức khỏe <em>chủ động</em>, có mặt mọi lúc bạn cần
-          </h1>
-          <p className="landing__lede">
-            Yên tư vấn triệu chứng bằng hội thoại tự nhiên, ghi nhớ hồ sơ sức khỏe của riêng
-            bạn để không phải hỏi lại từ đầu mỗi lần, và luôn ưu tiên tính mạng — phát hiện
-            dấu hiệu khẩn cấp là hướng dẫn gọi 115 ngay lập tức.
-          </p>
-          <div className="landing__cta-row">
-            <Link to="/dang-ky" className="btn btn--primary btn--lg">
-              <Sparkle width={15} height={15} /> Tạo tài khoản miễn phí <ArrowRight width={17} height={17} />
-            </Link>
-            <Link to="/dang-nhap" className="btn btn--ghost btn--lg">
-              <Clock width={16} height={16} /> Tôi đã có tài khoản
-            </Link>
-          </div>
-          <div className="trust-row">
-            <span><Shield width={15} height={15} /> Bảo mật tuyệt đối</span>
-            <span><Check width={15} height={15} /> Dễ sử dụng</span>
-            <span><Heart width={15} height={15} /> Đồng hành tin cậy</span>
-          </div>
-        </div>
-
-        <div className="hero-illustration" aria-hidden="true">
-          <div className="hero-illustration__blob" />
-          <div className="hero-illustration__leaves">
-            <span className="leaf-wrap leaf-wrap--1"><Leaf className="leaf" /></span>
-            <span className="leaf-wrap leaf-wrap--2"><Leaf className="leaf" /></span>
-            <span className="leaf-wrap leaf-wrap--3 is-flipped"><Leaf className="leaf" /></span>
-          </div>
-          <div className="hero-illustration__card">
-            <div className="hero-illustration__avatar"><Smile width={20} height={20} /></div>
-            <div>
-              <p className="hero-illustration__card-title">Xin chào, tôi là Yên</p>
-              <p className="hero-illustration__card-sub">Tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn 24/7</p>
-            </div>
-            <Heart className="hero-illustration__card-heart" width={15} height={15} />
-          </div>
-          <div className="hero-illustration__chips">
-            <span><Pulse width={18} height={18} /></span>
-            <span><Shield width={18} height={18} /></span>
-            <span><Chat width={18} height={18} /></span>
-          </div>
-        </div>
-      </main>
-
-      <section className="landing__features">
+      <section className="relative z-10 mx-auto grid w-full max-w-[1600px] grid-cols-1 gap-5 px-6 pb-14 sm:grid-cols-2 sm:px-10 xl:grid-cols-4 xl:px-16">
         {FEATURES.map((f) => (
-          <div className="feature-card" key={f.title}>
-            <div className="feature-card__top">
-              <div className="feature-card__icon">{f.icon}</div>
-              <span className={`feature-card__status ${f.status === 'Đã có' ? 'is-live' : ''}`}>
-                {f.status}
-              </span>
-            </div>
-            <h3 className="feature-card__title">{f.title}</h3>
-            <p className="feature-card__desc">{f.desc}</p>
-            <span className="feature-card__arrow"><ArrowRight width={15} height={15} /></span>
-          </div>
+          <FeatureCard key={f.title} {...f} />
         ))}
       </section>
 
-      <section className="landing__banner">
-        <Phone />
-        <p>Khi phát hiện dấu hiệu khẩn cấp (đau ngực dữ dội, khó thở, đột quỵ...), Yên bỏ qua mọi bước hỏi đáp và hướng dẫn gọi <strong>115</strong> ngay lập tức.</p>
+      <section className="relative z-10 mx-auto mb-10 flex w-full max-w-[900px] items-center gap-4 rounded-[20px] bg-gradient-to-r from-teal to-teal-deep px-8 py-5 text-white shadow-[0_18px_40px_rgba(7,137,154,0.28)] sm:px-10">
+        <PhoneCall className="h-7 w-7 shrink-0" strokeWidth={1.8} />
+        <p className="m-0 text-[14px] leading-relaxed">
+          Khi phát hiện dấu hiệu khẩn cấp (đau ngực dữ dội, khó thở, đột quỵ...), Yên bỏ qua mọi
+          bước hỏi đáp và hướng dẫn gọi <strong>115</strong> ngay lập tức.
+        </p>
       </section>
 
-      <footer className="landing__footer">
-        <div className="disclaimer" style={{ maxWidth: 680, margin: '0 auto' }}>
-          <Shield />
+      <footer className="relative z-10 mx-auto w-full max-w-[680px] px-6 pb-14 text-center sm:px-10">
+        <div className="flex items-start justify-center gap-2.5 text-[11.5px] leading-relaxed text-slate-text">
+          <ShieldAlert className="h-4 w-4 flex-none translate-y-[1px] text-slate-text" strokeWidth={1.8} />
           <span>
-            Yên là công cụ hỗ trợ phân loại mức độ khẩn cấp, <strong>không thay thế chẩn đoán y khoa</strong>.
+            Yên là công cụ hỗ trợ phân loại mức độ khẩn cấp, <strong className="text-navy">không thay thế chẩn đoán y khoa</strong>.
             Khi nghi ngờ, hãy liên hệ nhân viên y tế.
           </span>
         </div>
