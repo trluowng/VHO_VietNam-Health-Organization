@@ -99,7 +99,7 @@ def _require_user_id(authorization: str | None = Header(None)) -> str:
 
 
 def _user_public(row) -> dict:
-    return {"id": row["id"], "email": row["email"]}
+    return {"id": row["id"], "email": row["email"], "created_at": row["created_at"]}
 
 
 # ---------------------------------------------------------------------------
@@ -321,7 +321,7 @@ def register(payload: dict = Body(...)) -> dict:
     db.create_profile(user_id, age, gender, now)
 
     token = create_token(user_id)
-    return {"token": token, "user": {"id": user_id, "email": email}, "profile": db.get_profile(user_id)}
+    return {"token": token, "user": {"id": user_id, "email": email, "created_at": now}, "profile": db.get_profile(user_id)}
 
 
 @app.post("/auth/login")

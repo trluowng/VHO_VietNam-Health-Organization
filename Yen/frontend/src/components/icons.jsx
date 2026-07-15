@@ -69,6 +69,12 @@ export const Watch = (p) => (
     <path {...S} d="M12 9v3.2l2 1.3M9.5 4h5l-.6 3h-3.8L9.5 4zM9.5 20h5l-.6-3h-3.8l-.6 3z" />
   </svg>
 )
+export const User = (p) => (
+  <svg viewBox="0 0 24 24" {...p}>
+    <circle {...S} cx="12" cy="8.5" r="3.5" />
+    <path {...S} d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5" />
+  </svg>
+)
 export const Quiz = (p) => (
   <svg viewBox="0 0 24 24" {...p}>
     <circle {...S} cx="12" cy="12" r="9" />

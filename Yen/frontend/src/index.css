@@ -1202,6 +1202,24 @@ input, textarea { font-family: inherit; }
 }
 
 /* ============================================================
+   Profile page
+   ============================================================ */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+.profile-facts { margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.profile-facts > div { display: flex; flex-direction: column; gap: 3px; }
+.profile-facts dt {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+.profile-facts dd { margin: 0; font-size: 14.5px; font-weight: 500; color: var(--ink); }
+.profile-basics-form { display: flex; flex-direction: column; gap: 14px; }
+
+/* ============================================================
    Cycle tracker
    ============================================================ */
 .cycle-tracker { display: flex; flex-direction: column; gap: 20px; max-width: 640px; }

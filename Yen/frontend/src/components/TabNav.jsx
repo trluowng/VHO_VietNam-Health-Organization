@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
-import { Chat, Calendar, LogOut } from './icons.jsx'
+import { Chat, Calendar, User, LogOut } from './icons.jsx'
 
 export default function TabNav() {
   const { user, logout } = useAuth()
@@ -13,6 +13,9 @@ export default function TabNav() {
         </NavLink>
         <NavLink to="/app/lich" className={({ isActive }) => `tabnav__link ${isActive ? 'is-active' : ''}`}>
           <Calendar width={16} height={16} /> Lịch
+        </NavLink>
+        <NavLink to="/app/ho-so" className={({ isActive }) => `tabnav__link ${isActive ? 'is-active' : ''}`}>
+          <User width={16} height={16} /> Hồ sơ
         </NavLink>
       </nav>
       {user && <span className="pill-note">{user.email}</span>}
