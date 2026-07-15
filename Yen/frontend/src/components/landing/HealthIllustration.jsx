@@ -1,9 +1,9 @@
-import { Smile, Heart, Activity, ShieldCheck, MessageCircle, Leaf } from 'lucide-react'
-import StethoscopeArt from './StethoscopeArt.jsx'
+import { Smile, Heart, Activity, ShieldCheck, MessageCircle } from 'lucide-react'
+import stethoscopePhoto from '../../assets/landing/stethoscope.png'
 
-/* Minh hoạ bên phải hero. Ảnh ống nghe hiện là icon Lucide dựng lớn trên khối
-   bo cong — tách riêng ở đây để sau này thay bằng ảnh chụp thật chỉ cần đổi
-   khối <div className="stethoscope-plate"> bên dưới, không đụng vào phần còn lại. */
+/* Minh hoạ bên phải hero. Ảnh ống nghe (nền trong suốt, đã có sẵn đế đá +
+   lá cây) đặt trực tiếp — muốn đổi ảnh khác thì chỉ cần thay file trong
+   src/assets/landing/stethoscope.png, không đụng vào phần còn lại. */
 export default function HealthIllustration() {
   return (
     <div className="relative mx-auto h-[420px] w-full max-w-[560px] xl:mx-0" aria-hidden="true">
@@ -39,14 +39,12 @@ export default function HealthIllustration() {
         </span>
       </div>
 
-      {/* Bề mặt trắng bo cong + minh hoạ ống nghe, góc dưới-phải */}
-      <div className="stethoscope-plate absolute bottom-0 right-[2%] flex h-[190px] w-[230px] items-center justify-center rounded-[50%_50%_46%_54%/54%_54%_46%_46%] bg-white shadow-[0_24px_50px_rgba(16,42,92,0.16)]">
-        <StethoscopeArt className="h-[120px] w-[120px]" />
-      </div>
-
-      {/* Vài chiếc lá xanh nhạt cạnh khối ống nghe */}
-      <Leaf className="absolute bottom-[6%] right-[38%] h-8 w-8 text-teal/70 animate-leaf-sway [transform-origin:50%_100%]" strokeWidth={1.6} />
-      <Leaf className="absolute bottom-[-2%] right-[30%] h-6 w-6 -scale-x-100 text-teal-deep/60 animate-leaf-sway [animation-delay:0.6s] [transform-origin:50%_100%]" strokeWidth={1.6} />
+      {/* Ảnh ống nghe thật (đế đá + lá cây đã có sẵn trong ảnh), góc dưới-phải */}
+      <img
+        src={stethoscopePhoto}
+        alt="Ống nghe y tế đặt trên đế đá cẩm thạch"
+        className="absolute bottom-0 right-[-2%] w-[340px] max-w-[62%] drop-shadow-[0_20px_40px_rgba(16,42,92,0.18)] sm:max-w-[400px]"
+      />
     </div>
   )
 }
