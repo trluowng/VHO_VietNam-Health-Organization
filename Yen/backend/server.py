@@ -59,6 +59,11 @@ PROVIDER_NAME = os.getenv("TRIAGE_PROVIDER", "gemini")
 MODEL = os.getenv("TRIAGE_MODEL", None)          # None → provider's default_model
 HISTORY_WINDOW = int(os.getenv("TRIAGE_HISTORY_WINDOW", "5"))
 MAX_TOOL_ROUNDS = int(os.getenv("TRIAGE_MAX_TOOL_ROUNDS", "4"))
+# system_prompt.md nói tới "question budget" / max_questions nhưng trước đây không có
+# con số cụ thể nào được truyền vào — model không có tín hiệu thật để biết khi nào nên
+# dừng hỏi, dẫn tới hỏi lan man nhiều lượt liền. Định nghĩa cụ thể ở đây và bơm số câu
+# đã hỏi vào context mỗi lượt (xem _build_messages).
+MAX_QUESTIONS = int(os.getenv("TRIAGE_MAX_QUESTIONS", "3"))
 PORT = int(os.getenv("PORT", os.getenv("TRIAGE_PORT", "8787")))
 
 SYSTEM_PROMPT = (ARTIFACTS_DIR / "system_prompt.md").read_text(encoding="utf-8")
@@ -184,9 +189,36 @@ def _build_messages(history: list[dict], message: str, user_id: str | None) -> l
             "content": text,
         })
 
+    # Đếm số lượt hỏi lại đã dùng trên TOÀN bộ lịch sử (không chỉ phần còn trong cửa sổ
+    # trimmed), vì đây là ngân sách của cả cuộc trò chuyện, không phải của riêng context
+    # model đang thấy.
+    question_count = sum(1 for turn in flat if turn["role"] == "assistant")
+    remaining = max(MAX_QUESTIONS - question_count, 0)
+
     trimmed = trim_history(flat, HISTORY_WINDOW)
 
+    if remaining == 0 and question_count > 0:
+        budget_note = (
+            "Ngân sách câu hỏi đã HẾT — PHẢI đưa ra đánh giá cuối (result) ngay bây giờ, "
+            "KHÔNG hỏi thêm, dù độ tin cậy còn thấp; nêu rõ thông tin còn thiếu trong 'missing'."
+        )
+    elif remaining == 1:
+        budget_note = (
+            "Đây là câu hỏi CUỐI CÙNG được phép — sau câu trả lời của bệnh nhân lần này, "
+            "PHẢI đưa ra đánh giá cuối (result), dù độ tin cậy còn thấp; nêu rõ thông tin "
+            "còn thiếu trong 'missing' thay vì hỏi thêm."
+        )
+    else:
+        budget_note = "Nếu đã đủ thông tin thì đưa ra đánh giá cuối ngay, không cần hỏi hết ngân sách."
+
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    messages.append({
+        "role": "system",
+        "content": (
+            f"NGÂN SÁCH CÂU HỎI: đã hỏi {question_count}/{MAX_QUESTIONS} câu trong cuộc trò "
+            f"chuyện này, còn lại {remaining} câu. {budget_note}"
+        ),
+    })
     if user_id:
         profile_msg = _profile_context_message(user_id)
         if profile_msg:
