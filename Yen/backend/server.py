@@ -512,9 +512,11 @@ def create_cycle_entry(payload: dict = Body(...), authorization: str | None = He
     if not period_start_date:
         raise HTTPException(status_code=400, detail="period_start_date_required")
     try:
-        date.fromisoformat(period_start_date)
+        parsed_start = date.fromisoformat(period_start_date)
     except ValueError:
         raise HTTPException(status_code=400, detail="invalid_period_start_date")
+    if parsed_start > date.today():
+        raise HTTPException(status_code=400, detail="period_start_date_in_future")
 
     entry_id = db.add_cycle_entry(user_id, period_start_date, payload.get("note"), now_iso())
     entries = db.list_cycle_entries(user_id)

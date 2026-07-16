@@ -36,6 +36,9 @@ const ERROR_LABELS = {
   email_taken: 'Email này đã được đăng ký.',
   invalid_credentials: 'Email hoặc mật khẩu không đúng.',
   unauthorized: 'Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại.',
+  period_start_date_in_future: 'Ngày bắt đầu kỳ kinh không thể ở tương lai.',
+  period_start_date_required: 'Vui lòng chọn ngày bắt đầu kỳ kinh.',
+  invalid_period_start_date: 'Ngày bắt đầu kỳ kinh không hợp lệ.',
 }
 
 export const authApi = {

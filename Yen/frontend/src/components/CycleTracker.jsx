@@ -176,7 +176,7 @@ export default function CycleTracker() {
       <form className="cycle-form" onSubmit={addEntry}>
         <label>
           <span>Ngày bắt đầu kỳ kinh</span>
-          <input type="date" value={newDate} onChange={(e) => setNewDate(e.target.value)} required />
+          <input type="date" value={newDate} onChange={(e) => setNewDate(e.target.value)} max={todayIso} required />
         </label>
         <label>
           <span>Ghi chú (tuỳ chọn)</span>
