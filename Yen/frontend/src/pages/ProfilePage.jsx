@@ -1,58 +1,44 @@
-import { useState } from 'react'
 import { useAuth } from '../context/AuthContext.jsx'
-import { Cross } from '../components/icons.jsx'
+import { Cross, User, Phone } from '../components/icons.jsx'
 import TabNav from '../components/TabNav.jsx'
 import EditableTagList from '../components/EditableTagList.jsx'
+import ProfileSidebar from '../components/ProfileSidebar.jsx'
+import ProfileInfoCard from '../components/ProfileInfoCard.jsx'
 
-const GENDERS = [
+const GENDER_OPTIONS = [
   { value: 'nu', label: 'Nữ' },
   { value: 'nam', label: 'Nam' },
 ]
 
-function formatDate(iso) {
-  if (!iso) return '—'
-  const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return '—'
-  return d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })
-}
+const PERSONAL_FIELDS = [
+  { key: 'full_name', label: 'Họ và tên', placeholder: 'vd: Nguyễn Minh An' },
+  { key: 'birth_date', label: 'Ngày sinh', type: 'date' },
+  { key: 'gender', label: 'Giới tính', type: 'select', options: GENDER_OPTIONS, format: (v) => GENDER_OPTIONS.find((g) => g.value === v)?.label || '—' },
+  { key: 'phone', label: 'Số điện thoại', type: 'tel', placeholder: 'vd: 0901 234 567' },
+  { key: 'address', label: 'Địa chỉ', placeholder: 'vd: 123 Đường Lê Lợi, Q.1, TP.HCM' },
+  { key: 'occupation', label: 'Nghề nghiệp', placeholder: 'vd: Nhân viên văn phòng' },
+  { key: 'blood_type', label: 'Nhóm máu', placeholder: 'vd: O+' },
+  { key: 'insurance_status', label: 'Bảo hiểm y tế', placeholder: 'vd: Có hiệu lực' },
+  { key: 'insurance_number', label: 'Mã số BHYT', placeholder: 'vd: HT1234567890' },
+]
+
+const EMERGENCY_FIELDS = [
+  { key: 'emergency_contact_name', label: 'Họ và tên', placeholder: 'vd: Trần Thị Lan' },
+  { key: 'emergency_contact_relationship', label: 'Mối quan hệ', placeholder: 'vd: Mẹ' },
+  { key: 'emergency_contact_phone', label: 'Số điện thoại', type: 'tel', placeholder: 'vd: 0912 345 678' },
+]
 
 export default function ProfilePage() {
-  const { user, profile, isFemale, updateProfile } = useAuth()
-  const [age, setAge] = useState(profile?.age ?? '')
-  const [gender, setGender] = useState(profile?.gender ?? '')
-  const [busy, setBusy] = useState(false)
-  const [error, setError] = useState(null)
-  const [saved, setSaved] = useState(false)
+  const { user, profile, updateProfile } = useAuth()
 
-  const dirty = String(age) !== String(profile?.age ?? '') || gender !== (profile?.gender ?? '')
-
-  async function saveBasics(e) {
-    e.preventDefault()
-    const ageNum = Number(age)
-    if (!Number.isInteger(ageNum) || ageNum <= 0 || ageNum >= 120) {
-      setError('Tuổi không hợp lệ.')
-      return
-    }
-    setBusy(true)
-    setError(null)
-    setSaved(false)
-    try {
-      await updateProfile({ age: ageNum, gender })
-      setSaved(true)
-    } catch (err) {
-      setError(err.message || 'Không lưu được, thử lại nhé.')
-    } finally {
-      setBusy(false)
-    }
+  async function save(updates) {
+    // age phải là số nguyên nếu đổi giới tính đi kèm form khác cập nhật riêng —
+    // ở đây chỉ các trường text/select nên gửi thẳng object con.
+    await updateProfile(updates)
   }
 
   async function updateList(key, values) {
-    setBusy(true)
-    try {
-      await updateProfile({ [key]: values })
-    } finally {
-      setBusy(false)
-    }
+    await updateProfile({ [key]: values })
   }
 
   return (
@@ -75,78 +61,51 @@ export default function ProfilePage() {
         </header>
 
         <div className="calendar-page__body">
-          <div className="profile-grid">
-            <section className="panel">
-              <p className="panel__label" style={{ margin: '0 0 14px' }}>Tài khoản</p>
-              <dl className="profile-facts">
-                <div><dt>Email</dt><dd>{user?.email}</dd></div>
-                <div><dt>Ngày tạo tài khoản</dt><dd>{formatDate(user?.created_at)}</dd></div>
-                <div><dt>Hồ sơ cập nhật lần cuối</dt><dd>{formatDate(profile?.updated_at)}</dd></div>
-              </dl>
-            </section>
+          <div className="profile-layout">
+            <ProfileSidebar user={user} profile={profile || {}} />
 
-            <section className="panel">
-              <p className="panel__label" style={{ margin: '0 0 14px' }}>Thông tin cá nhân</p>
-              <form className="profile-basics-form" onSubmit={saveBasics}>
-                <label className="auth-field">
-                  <span>Tuổi</span>
-                  <input
-                    type="number"
-                    min={1}
-                    max={119}
-                    value={age}
-                    onChange={(e) => { setAge(e.target.value); setSaved(false) }}
-                    required
-                  />
-                </label>
-                <div className="auth-field">
-                  <span>Giới tính</span>
-                  <div className="gender-picker">
-                    {GENDERS.map((g) => (
-                      <button
-                        type="button"
-                        key={g.value}
-                        className={`gender-chip ${gender === g.value ? 'is-active' : ''}`}
-                        onClick={() => { setGender(g.value); setSaved(false) }}
-                      >
-                        {g.label}
-                      </button>
-                    ))}
-                  </div>
-                  {isFemale && (
-                    <p className="auth-field__hint">
-                      Tài khoản nữ có thêm tab theo dõi chu kỳ kinh nguyệt trong mục Lịch.
-                    </p>
-                  )}
-                </div>
-                {error && <p className="auth-error">{error}</p>}
-                <button className="btn btn--primary" type="submit" disabled={busy || !dirty}>
-                  {busy ? 'Đang lưu…' : saved ? 'Đã lưu' : 'Lưu thay đổi'}
-                </button>
-              </form>
-            </section>
+            <div className="profile-main">
+              <ProfileInfoCard
+                icon={User}
+                title="Thông tin cá nhân"
+                fields={PERSONAL_FIELDS}
+                values={profile || {}}
+                onSave={save}
+              />
 
-            <EditableTagList
-              label="Bệnh nền"
-              values={profile?.chronic_conditions || []}
-              onChange={(v) => updateList('chronic_conditions', v)}
-              placeholder="vd: tiểu đường"
-              busy={busy}
-            />
-            <EditableTagList
-              label="Dị ứng"
-              values={profile?.allergies || []}
-              onChange={(v) => updateList('allergies', v)}
-              placeholder="vd: penicillin"
-              busy={busy}
-            />
-            <EditableTagList
-              label="Thuốc đang dùng"
-              values={profile?.medications || []}
-              onChange={(v) => updateList('medications', v)}
-              placeholder="vd: metformin"
-              busy={busy}
-            />
+              <div className="profile-main__row">
+                <EditableTagList
+                  label="Tiền sử bệnh"
+                  values={profile?.chronic_conditions || []}
+                  onChange={(v) => updateList('chronic_conditions', v)}
+                  placeholder="vd: tăng huyết áp"
+                />
+                <EditableTagList
+                  label="Dị ứng"
+                  values={profile?.allergies || []}
+                  onChange={(v) => updateList('allergies', v)}
+                  placeholder="vd: penicillin"
+                  tone="danger"
+                />
+              </div>
+
+              <div id="emergency-contact">
+                <ProfileInfoCard
+                  icon={Phone}
+                  title="Người liên hệ khẩn cấp"
+                  fields={EMERGENCY_FIELDS}
+                  values={profile || {}}
+                  onSave={save}
+                />
+              </div>
+
+              <section className="panel">
+                <p className="panel__label" style={{ margin: '0 0 14px' }}>Tài khoản</p>
+                <dl className="profile-facts">
+                  <div><dt>Email</dt><dd>{user?.email}</dd></div>
+                </dl>
+              </section>
+            </div>
           </div>
         </div>
       </div>

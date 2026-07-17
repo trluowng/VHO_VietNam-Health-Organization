@@ -32,6 +32,17 @@ CREATE TABLE IF NOT EXISTS health_profiles (
     chronic_conditions TEXT NOT NULL DEFAULT '[]',
     allergies TEXT NOT NULL DEFAULT '[]',
     medications TEXT NOT NULL DEFAULT '[]',
+    full_name TEXT,
+    birth_date TEXT,
+    phone TEXT,
+    address TEXT,
+    occupation TEXT,
+    blood_type TEXT,
+    insurance_status TEXT,
+    insurance_number TEXT,
+    emergency_contact_name TEXT,
+    emergency_contact_relationship TEXT,
+    emergency_contact_phone TEXT,
     updated_at TEXT NOT NULL
 );
 
@@ -62,7 +73,14 @@ CREATE INDEX IF NOT EXISTS idx_calendar_user ON calendar_entries(user_id, entry_
 """
 
 # Cột thêm sau lần tạo bảng đầu tiên — DB cũ trên máy dev cần ALTER TABLE để có đủ cột.
-CALENDAR_ENTRIES_MIGRATIONS = ["time_start TEXT", "time_end TEXT", "doctor TEXT", "location TEXT"]
+TABLE_MIGRATIONS = {
+    "calendar_entries": ["time_start TEXT", "time_end TEXT", "doctor TEXT", "location TEXT"],
+    "health_profiles": [
+        "full_name TEXT", "birth_date TEXT", "phone TEXT", "address TEXT", "occupation TEXT",
+        "blood_type TEXT", "insurance_status TEXT", "insurance_number TEXT",
+        "emergency_contact_name TEXT", "emergency_contact_relationship TEXT", "emergency_contact_phone TEXT",
+    ],
+}
 
 
 @contextmanager
@@ -79,11 +97,12 @@ def get_conn():
 def init_db() -> None:
     with get_conn() as conn:
         conn.executescript(SCHEMA)
-        existing = {row["name"] for row in conn.execute("PRAGMA table_info(calendar_entries)")}
-        for column_def in CALENDAR_ENTRIES_MIGRATIONS:
-            column_name = column_def.split()[0]
-            if column_name not in existing:
-                conn.execute(f"ALTER TABLE calendar_entries ADD COLUMN {column_def}")
+        for table, column_defs in TABLE_MIGRATIONS.items():
+            existing = {row["name"] for row in conn.execute(f"PRAGMA table_info({table})")}
+            for column_def in column_defs:
+                column_name = column_def.split()[0]
+                if column_name not in existing:
+                    conn.execute(f"ALTER TABLE {table} ADD COLUMN {column_def}")
 
 
 def new_id() -> str:
@@ -118,6 +137,13 @@ def get_user_by_id(user_id: str) -> sqlite3.Row | None:
 # Health profile
 # ---------------------------------------------------------------------------
 
+PROFILE_TEXT_FIELDS = (
+    "full_name", "birth_date", "phone", "address", "occupation", "blood_type",
+    "insurance_status", "insurance_number",
+    "emergency_contact_name", "emergency_contact_relationship", "emergency_contact_phone",
+)
+
+
 def create_profile(user_id: str, age: int | None, gender: str | None, updated_at: str) -> None:
     with get_conn() as conn:
         conn.execute(
@@ -131,7 +157,7 @@ def get_profile(user_id: str) -> dict | None:
         row = conn.execute("SELECT * FROM health_profiles WHERE user_id = ?", (user_id,)).fetchone()
     if not row:
         return None
-    return {
+    profile = {
         "age": row["age"],
         "gender": row["gender"],
         "chronic_conditions": json.loads(row["chronic_conditions"]),
@@ -139,6 +165,9 @@ def get_profile(user_id: str) -> dict | None:
         "medications": json.loads(row["medications"]),
         "updated_at": row["updated_at"],
     }
+    for key in PROFILE_TEXT_FIELDS:
+        profile[key] = row[key]
+    return profile
 
 
 def update_profile(user_id: str, updates: dict, updated_at: str) -> None:
@@ -151,6 +180,10 @@ def update_profile(user_id: str, updates: dict, updated_at: str) -> None:
         if key in updates:
             fields.append(f"{key} = ?")
             values.append(json.dumps(updates[key], ensure_ascii=False))
+    for key in PROFILE_TEXT_FIELDS:
+        if key in updates:
+            fields.append(f"{key} = ?")
+            values.append(updates[key])
     if not fields:
         return
     fields.append("updated_at = ?")

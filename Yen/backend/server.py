@@ -379,6 +379,12 @@ def put_profile(payload: dict = Body(...), authorization: str | None = Header(No
             if not isinstance(value, list) or not all(isinstance(v, str) for v in value):
                 raise HTTPException(status_code=400, detail=f"invalid_{key}")
             updates[key] = value
+    for key in db.PROFILE_TEXT_FIELDS:
+        if key in payload:
+            value = payload[key]
+            if value is not None and not isinstance(value, str):
+                raise HTTPException(status_code=400, detail=f"invalid_{key}")
+            updates[key] = (value or "").strip() or None
 
     db.update_profile(user_id, updates, now_iso())
     return db.get_profile(user_id)

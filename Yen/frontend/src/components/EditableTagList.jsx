@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Cross } from './icons.jsx'
 
-export default function EditableTagList({ label, values, onChange, placeholder, busy }) {
+export default function EditableTagList({ label, values, onChange, placeholder, busy, tone }) {
   const [editing, setEditing] = useState(false)
   const [adding, setAdding] = useState(false)
   const [draft, setDraft] = useState('')
@@ -35,7 +35,7 @@ export default function EditableTagList({ label, values, onChange, placeholder, 
             {values.map((v) => (
               <motion.span
                 key={v}
-                className={`chip ${editing ? 'is-editing' : ''}`}
+                className={`chip ${tone === 'danger' ? 'chip--danger' : ''} ${editing ? 'is-editing' : ''}`}
                 layout
                 initial={{ opacity: 0, scale: 0.7 }}
                 animate={{ opacity: 1, scale: 1 }}
